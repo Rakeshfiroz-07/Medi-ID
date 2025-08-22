@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Home Screen</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #f3f4f6, #e2e8f0);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .header {
+            height:70px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 10px 20px;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            width: 150px;
+        }
+        .container {
+            background: white;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+            padding: 40px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 1100px;
+            margin: 60px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 30%;
+        }
+        .option img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid #007bff;
+            margin-bottom: 10px;
+        }
+        .btn {
+            padding: 10px;
+            width: auto;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        }
+        .btn:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .content {
+            display: none;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        .form-container {
+            display: none;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 50%;
+            margin: auto;
+        }
+        .form-container input, .form-container select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="images/logo.jpg" alt="Logo" class="logo">
+    </div>
+    <div class="container">
+        <div class="option">
+            <img src="images/appointment_booking.jpeg" alt="Appointment Booking">
+            <a href="Appointment_Booking.html"><button class="btn" onclick="showContent('appointmentForm')">Appointment Booking</button></a>
+        </div>
+        <div class="option">
+            <img src="images/patient_data_img.jpeg" alt="Patient Data">
+            <a href="Patient_Data.html"><button class="btn">Patient Data</button></a>  
+        </div>
+        <div class="option">
+            <img src="images/lab_reports_img.jpeg" alt="Lab Reports">
+            <a href ="Lab_Records.html"><button class="btn">Lab Reports</button></a>
+        </div>
+    </div>
+    
+    <!-- <div id="patient" class="content">
+        <h2>Patient Data <button class="btn" onclick="showContent('patientForm')">+ Add Patient</button></h2>
+        <table id="patientTable">
+            <tr>
+                <th>Patient Name</th>
+                <th>Patient ID</th>
+                <th>Last OP Date</th>
+                <th>Current OP Status</th>
+            </tr>
+        </table>
+    </div> -->
+
+    <!-- <div id="patientForm" class="form-container">
+        <h3>Add Patient</h3>
+        <input type="text" id="patientName" placeholder="Patient Name">
+        <input type="text" id="patientID" placeholder="Patient ID">
+        <input type="date" id="lastOpDate">
+        <select id="opStatus">
+            <option value="Booked">Booked</option>
+            <option value="Unbooked">Unbooked</option>
+        </select>
+        <button class="btn" onclick="addPatient()">Submit</button>
+    </div> -->
+
+    <!-- <div id="appointmentForm" class="form-container">
+        <h3>Book Appointment</h3>
+        <input type="text" id="appointPatientName" placeholder="Patient Name">
+        <input type="text" id="appointPatientID" placeholder="Patient ID">
+        <select id="doctorSpecialization">
+            <option value="Cardiology">Cardiology</option>
+            <option value="Dermatology">Dermatology</option>
+            <option value="Orthopedics">Orthopedics</option>
+        </select>
+        <button class="btn" onclick="confirmAppointment()">Book</button>
+    </div> -->
+
+    <script>
+        function showContent(section) {
+            document.querySelectorAll('.content, .form-container').forEach(div => div.style.display = 'none');
+            document.getElementById(section).style.display = 'block';
+        }
+
+        function addPatient() {
+            let table = document.getElementById("patientTable");
+            let row = table.insertRow(-1);
+            row.insertCell(0).innerText = document.getElementById("patientName").value;
+            row.insertCell(1).innerText = document.getElementById("patientID").value;
+            row.insertCell(2).innerText = document.getElementById("lastOpDate").value;
+            row.insertCell(3).innerText = document.getElementById("opStatus").value;
+            document.getElementById("patientForm").style.display = "none";
+        }
+
+        function confirmAppointment() {
+            alert("Appointment booked successfully!");
+            document.getElementById("appointmentForm").style.display = "none";
+        }
+
+        function goToLabReports() {
+            window.open("lab_reports.html", "_blank");
+        }
+    </script>
+</body>
+</html>

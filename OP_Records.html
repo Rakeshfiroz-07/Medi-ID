@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OP Records</title>
+    <link rel="stylesheet" href="OP_Records.css">
+</head>
+<body>
+    <div class="header">
+        <img src="images/logo.jpg" alt="Logo" class="logo">
+    </div>
+    <div class="container">
+        <h1>View Records</h1>
+        <button class="btn" onclick="bookAppointment()">Book Appointment</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>View Record</th>
+                </tr>
+            </thead>
+            <tbody id="recordsTable">
+                <!-- Records will be loaded dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            loadReports();
+        });
+
+        function loadReports() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const patientId = urlParams.get('id');
+
+            if (!patientId) {
+                alert("No patient selected!");
+                return;
+            }
+
+            const reports = JSON.parse(localStorage.getItem('reports')) || {};
+            const patientReports = reports[patientId] || [];
+
+            const table = document.getElementById('recordsTable');
+            table.innerHTML = '';
+
+            if (patientReports.length === 0) {
+                table.innerHTML = '<tr><td colspan="2">No records found</td></tr>';
+                return;
+            }
+
+            patientReports.forEach(report => {
+                const newRow = table.insertRow();
+                newRow.insertCell(0).textContent = report.date;
+                newRow.insertCell(1).innerHTML = `<button class="btn">View Record</button>`;
+            });
+        }
+
+        function bookAppointment() {
+            window.location.href = "booking.html";
+        }
+    </script>
+
+</body>
+</html>

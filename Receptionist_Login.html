@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receptionist Login</title>
+    <link rel="stylesheet" href="Seperate_Login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="logo">
+                <img src="images/logo.jpg" alt="Logo">
+            </div>
+            <form onsubmit="handleSubmit(event)">
+                <input
+                    type="email"
+                    class="input-field"
+                    placeholder="Email"
+                    id="email"
+                    required
+                />
+                <input
+                    type="password"
+                    class="input-field"
+                    placeholder="Password"
+                    id="password"
+                    required
+                />
+                <button type="submit" class="login-button">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            console.log("Email:", email, "Password:", password);
+            // Add authentication logic here
+	 window.location.href = "Appointment_Booking.html";
+        }
+    </script>
+</body>
+</html>

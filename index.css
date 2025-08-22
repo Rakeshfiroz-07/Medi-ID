@@ -1,0 +1,56 @@
+body, html {
+    background-image: url("images/background.jpeg");
+    /* background-size: cover; */
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .full-page-image {
+    height: 100vh; 
+    width: 100vw;  
+    overflow: hidden;
+    background-repeat: repeat-x;
+  }
+  
+  .full-page-image img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  .logo {
+    position: absolute;
+    top: 10px;  
+    left: 10px;  
+  }
+  
+  .logo img {
+    height: 100px; 
+    width: auto;
+    background-color: transparent;
+  }
+  
+  .right-top-box {
+    position: absolute;
+    top: 35px; 
+    right: 100px; 
+    background-color: #fdfbfb; 
+    padding: 5px; 
+    border-radius: 30px; 
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+  }
+  
+  .centered-link {
+    font-size:18px;
+    display: inline-block;  
+    text-align: center;  
+    padding: 3px 30px; 
+    text-decoration: none;  
+    border-radius: 30px; 
+    
+  }
+  

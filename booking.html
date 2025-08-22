@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
+    <link rel="stylesheet" href="Appointment_Booking.css">
+</head>
+<body>
+    <div class="header">
+        <img src="images/logo.jpg" alt="Logo" class="logo">
+    </div><br><br>
+    <div class="container">
+        <h1>Book Appointment</h1>
+        <form id="appointmentForm" class="animated-form">
+            <label for="patientName">Patient Name</label>
+            <input type="text" id="patientName" placeholder="Enter fullname" required>
+
+            <label for="patientEmail">Patient Email</label>
+            <input type="email" id="patientEmail" placeholder="Enter email address" required>
+
+            <label for="patientPhone">Patient Phone</label>
+            <input type="tel" id="patientPhone" placeholder="Enter phone number" required>
+
+            <label for="appointmentDate">Select Date</label>
+            <input type="date" id="appointmentDate" required>
+
+            <label for="problem">Problem</label>
+            <textarea id="problem" placeholder="Enter Problem" required></textarea>
+
+            <label for="gender">Gender</label>
+            <select id="gender" required>
+                <option value="">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="age">Age</label>
+            <input type="number" id="age" placeholder="Enter age" required>
+
+            <label for="appointmentTime">Select Time</label>
+            <input type="time" id="appointmentTime" required>
+
+            <label for="specialist">Specialist Doctor</label>
+            <select id="specialist" required>
+                <option value="">Select</option>
+                <option value="cardiologist">Cardiologist</option>
+                <option value="dermatologist">Dermatologist</option>
+                <option value="pediatrician">Pediatrician</option>
+            </select>
+
+            <button type="submit" class="btn">Book Appointment</button>
+            <button type="button" class="btn cancel" onclick="resetForm()">Cancel</button>
+        </form>
+
+        <a href="Appointment_Booking.html" class="animation-link">View Appointments</a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

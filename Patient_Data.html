@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Data</title>
+    <link rel="stylesheet" href="Patient_Data.css">
+</head>
+<body>
+    <div class="main-container">
+        <header class="header">
+            <img src="images/logo.jpg" alt="Clinic Logo" class="logo">
+        </header>
+        <div class="content">
+            <h2>Patient List</h2>
+            <table class="patient-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <!-- <th>Details</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>P001</td>
+                        <td>John Doe</td>
+                        <td>32</td>
+                        <!-- <td><a href="patient.html?id=P001" class="view-btn">View</a></td> -->
+                    </tr>
+                    <tr>
+                        <td>P002</td>
+                        <td>Jane Smith</td>
+                        <td>28</td>
+                        <!-- <td><a href="patient.html?id=P002" class="view-btn">View</a></td> -->
+                    </tr>
+                </tbody>
+            </table>
+            <div class="add-patient-form">
+                <h3>Add New Patient</h3>
+                <input type="text" id="patientId" placeholder="Patient ID">
+                <input type="text" id="patientName" placeholder="Name">
+                <input type="number" id="patientAge" placeholder="Age">
+                <button onclick="addPatient()" class="add-btn">Add Patient</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function addPatient() {
+            let id = document.getElementById('patientId').value;
+            let name = document.getElementById('patientName').value;
+            let age = document.getElementById('patientAge').value;
+            
+            if (id && name && age) {
+                let table = document.querySelector('.patient-table tbody');
+                let newRow = `<tr>
+                                <td>${id}</td>
+                                <td>${name}</td>
+                                <td>${age}</td>
+                                
+                              </tr>`;
+                table.innerHTML += newRow;
+                document.getElementById('patientId').value = '';
+                document.getElementById('patientName').value = '';
+                document.getElementById('patientAge').value = '';
+            }
+        }
+    </script>
+</body>
+</html>

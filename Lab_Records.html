@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Report Management</title>
+    <style>
+        body {
+            background-image: url('images/background.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            text-align: center;
+        }
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 150px;
+        }
+        h1 {
+            color: black;
+            margin-top: 50px;
+        }
+        .add-btn {
+            background-color: #007bff;
+            border: none;
+            color: white;
+            font-size: 30px;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .add-btn:hover {
+            background-color: #0056b3;
+        }
+        .form-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+        }
+        .form-container h2 {
+            color: black;
+        }
+        .form-container label {
+            color: black;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        .form-container input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-container button {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .submit-btn {
+            background-color: #28a745;
+            color: white;
+        }
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+        .close-btn {
+            background-color: red;
+            color: white;
+        }
+        .close-btn:hover {
+            background-color: darkred;
+        }
+        .table-container {
+            width: 80%;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            color: black;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn {
+            background-color: red;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .btn:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <img src="images/logo.png" alt="Logo" class="logo">
+    <br><br><br><br><br><br><br><br><br>
+    <div class="table-container">
+        <h2 style="color:black">Lab Records</h2>
+        <!--<button class="btn" onclick="clearLabReports()">Clear Reports</button>  Clear Reports Button -->
+        <table id="patientTable">
+            <thead>
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Patient ID</th>
+                    <th>Lab Report</th>
+                    <th>Report Status</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <button class="add-btn" onclick="showForm()">+</button>
+    <div id="patientForm" class="form-container">
+        <h2>Add Patient</h2>
+        <label for="patient_name">Patient Name:</label>
+        <input type="text" id="patient_name" placeholder="Enter name">
+        <label for="patient_id">Patient ID:</label>
+        <input type="text" id="patient_id" placeholder="Enter ID">
+        <label for="lab_report">Lab Report:</label>
+        <input type="text" id="lab_report" placeholder="Enter lab report">
+        <label for="report_status">Report Status:</label>
+        <input type="text" id="report_status" placeholder="Enter report status">
+        <button class="submit-btn" onclick="addPatient()">Add Patient</button>
+        <button class="close-btn" onclick="hideForm()">Close</button>
+    </div>
+    <script>
+        function showForm() {
+            document.getElementById("patientForm").style.display = "block";
+        }
+        function hideForm() {
+            document.getElementById("patientForm").style.display = "none";
+        }
+        function addPatient() {
+            var name = document.getElementById("patient_name").value;
+            var id = document.getElementById("patient_id").value;
+            var labReport = document.getElementById("lab_report").value;
+            var reportStatus = document.getElementById("report_status").value;
+            if (name === "" || id === "" || labReport === "" || reportStatus === "") {
+                alert("Please fill in all fields!");
+                return;
+            }
+            var patients = JSON.parse(localStorage.getItem("patients")) || [];
+            patients.push({ name, id, labReport, reportStatus });
+            localStorage.setItem("patients", JSON.stringify(patients));
+            renderTable();
+            document.getElementById("patient_name").value = "";
+            document.getElementById("patient_id").value = "";
+            document.getElementById("lab_report").value = "";
+            document.getElementById("report_status").value = "";
+            hideForm();
+        }
+        function renderTable() {
+            var table = document.getElementById("patientTable").getElementsByTagName('tbody')[0];
+            table.innerHTML = "";
+            var patients = JSON.parse(localStorage.getItem("patients")) || [];
+            patients.forEach(function(patient) {
+                var newRow = table.insertRow();
+                var cell1 = newRow.insertCell(0);
+                var cell2 = newRow.insertCell(1);
+                var cell3 = newRow.insertCell(2);
+                var cell4 = newRow.insertCell(3);
+                cell1.textContent = patient.name;
+                cell2.textContent = patient.id;
+                cell3.textContent = patient.labReport;
+                cell4.textContent = patient.reportStatus;
+            });
+        }
+        function clearLabReports() {
+            localStorage.removeItem("patients"); 
+            renderTable(); 
+        }
+        document.addEventListener("DOMContentLoaded", renderTable);
+    </script>
+</body>
+</html>

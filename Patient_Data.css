@@ -1,0 +1,128 @@
+/* General Layout */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+  }
+  
+  /* Header Styling */
+  .header {
+    height:50px;
+    background-color: white;
+    padding: 15px;
+    display: flex;
+    /* align-items: center; */
+    border-bottom: 2px solid #ddd;
+    width:100%;
+    position : fixed;
+  }
+  
+  .logo {
+    height: 60px;
+  }
+  /* .heading{
+    padding-left:50px;
+  } */
+  
+  /* Content Styling */
+  .content {
+    padding: 100px 20px 20px;
+    text-align: center;
+  }
+  
+  /* Patient Table */
+  .patient-table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .patient-table th, .patient-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .patient-table th {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .view-btn {
+    padding: 5px 10px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .view-btn:hover {
+    background-color: #218838;
+  }
+  
+  /* Patient Details */
+  .info-box {
+    width: 60%;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+  
+  .info-box h3 {
+    color: #007bff;
+  }
+  
+  .info-box h4 {
+    margin-top: 15px;
+    color: #333;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  ul li {
+    background: #e9ecef;
+    margin: 5px 0;
+    padding: 8px;
+    border-radius: 5px;
+  }
+  
+  .add-patient-form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px;
+    margin: auto;
+  }
+  
+  .add-patient-form input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .add-btn {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .add-btn:hover {
+    background-color: #0056b3;
+  }
+  

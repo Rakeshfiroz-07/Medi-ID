@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment List</title>
+    <link rel="stylesheet" href="Appointment_Booking.css">
+    <style>
+        a {
+            text-decoration: none;
+            color: white;
+        }
+        .btn {
+            background-color: blue;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+            border-radius: 5px;
+        }
+        .form-container {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            width: 50%;
+        }
+        input {
+            padding: 8px;
+            margin: 5px;
+            width: 90%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="images/logo.jpg" alt="Logo" class="logo">
+    </div>
+    <br><br>
+    <div class="container">
+        <h1>Appointment List</h1>
+        <button class="btn"><a href="booking.html">Book Appointment</a></button>
+        <button class="btn" onclick="showForm()">Add New Patient</button>
+        <button class="btn" onclick="clearData()">Clear Data</button>
+
+        <!-- Add Patient Form -->
+        <div class="form-container" id="addPatientForm">
+            <input type="text" id="patientName" placeholder="Enter Patient's Name">
+            <input type="text" id="patientPhone" placeholder="Enter Patient's Mobile Number">
+            <button class="btn" onclick="addNewPatient()">Add Patient</button>
+        </div>
+
+        <table id="appointmentsTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>View Reports</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Patients will be added here dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            loadPatients();
+        });
+
+        function showForm() {
+            document.getElementById('addPatientForm').style.display = 'block';
+        }
+
+        function addNewPatient() {
+            const name = document.getElementById('patientName').value.trim();
+            const phone = document.getElementById('patientPhone').value.trim();
+
+            if (!name || !phone || phone.length < 10) {
+                alert("Please enter a valid name and 10-digit phone number.");
+                return;
+            }
+
+            const patientId = phone + name.substring(0, 2).toUpperCase(); // Generate ID
+
+            const newPatient = {
+                id: patientId,
+                name: name,
+                phone: phone
+            };
+
+            let patients = JSON.parse(localStorage.getItem('patients')) || [];
+            patients.push(newPatient);
+            localStorage.setItem('patients', JSON.stringify(patients));
+
+            // Clear input fields and hide form
+            document.getElementById('patientName').value = '';
+            document.getElementById('patientPhone').value = '';
+            document.getElementById('addPatientForm').style.display = 'none';
+
+            loadPatients();
+        }
+
+        function loadPatients() {
+            const patients = JSON.parse(localStorage.getItem('patients')) || [];
+            const table = document.getElementById('appointmentsTable').getElementsByTagName('tbody')[0];
+            table.innerHTML = '';
+
+            patients.forEach(patient => {
+                const newRow = table.insertRow();
+                const cells = [
+                    patient.id,
+                    patient.name,
+                    patient.phone,
+                    `<button class="btn" onclick="redirectToOPRecords('${patient.id}')">View Reports</button>`
+
+                ];
+
+                cells.forEach((cellData, index) => {
+                    const newCell = newRow.insertCell(index);
+                    newCell.innerHTML = cellData;
+                });
+            });
+        }
+        function redirectToOPRecords(patientId) {
+    window.location.href = `OP_Records.html?id=${patientId}`;
+}
+
+        function clearData() {
+            localStorage.removeItem('patients');
+            document.getElementById('appointmentsTable').getElementsByTagName('tbody')[0].innerHTML = '';
+        }
+    </script>
+</body>
+</html>
